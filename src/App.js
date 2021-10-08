@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Layout from "./components/Layout";
+import GoodMorningSection from "./components/GoodMorningSection";
+import RecentlyPlayed from "./components/RecentlyPlayed";
+import ShowsToTry from "./components/ShowsToTry";
+import ArtistSection from "./components/ArtistSection";
+import {BrowserRouter as Router, Route } from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Router>
+      <Route path="/" exact render={(routerProps) => <Layout>
+        <GoodMorningSection/>
+        <RecentlyPlayed/>
+        <ShowsToTry/>
+      </Layout> } />
+      <Route path="/artist/:artist" render={(routerProps) => <Layout>
+        <ArtistSection artist={routerProps.match.params.artist}/>
+      </Layout>}/>
+    </Router>
+    </>
   );
 }
 
